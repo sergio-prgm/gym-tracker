@@ -125,9 +125,21 @@
             ],
             "scripts": []
           }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "gym-crud"
+  "defaultProject": "gym-crud",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
