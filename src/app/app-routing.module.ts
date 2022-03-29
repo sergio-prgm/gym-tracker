@@ -7,6 +7,16 @@ const routes: Routes = [
     loadChildren: () =>
       import('./pages/auth/auth.module').then(m => m.AuthModule),
   },
+  {
+    path: 'dashboard',
+    loadChildren: () =>
+      import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+  },
+  {
+    path: 'workout',
+    loadChildren: () =>
+      import('./pages/workout/workout.module').then(m => m.WorkoutModule),
+  },
 ]
 
 @NgModule({
