@@ -5,22 +5,22 @@ const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () =>
-      import('./pages/auth/auth.module').then(m => m.AuthModule),
+      import('./pages/auth/auth.module').then(m => m.AuthModule)
   },
   {
     path: 'dashboard',
     loadChildren: () =>
-      import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+      import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
     path: 'workout',
     loadChildren: () =>
-      import('./pages/workout/workout.module').then(m => m.WorkoutModule),
-  },
+      import('./pages/workout/workout.module').then(m => m.WorkoutModule)
+  }
 ]
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
