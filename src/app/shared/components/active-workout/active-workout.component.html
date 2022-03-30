@@ -1,1 +1,81 @@
-<p>active-workout works!</p>
+<section class="p-4">
+  <h1 class="text-2xl font-bold text-center py-4">New Workout</h1>
+  <form [formGroup]="workoutForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="workoutName">Name</label>
+      <input
+        type="text"
+        class="block rounded"
+        id="workoutName"
+        name="workoutName"
+        formControlName="workoutName"
+        placeholder="Name..." />
+      <label for="date">Date</label>
+      <input
+        type="date"
+        class="block rounded"
+        id="date"
+        name="date"
+        formControlName="date"
+        placeholder="Date..." />
+      <button
+        class="inline-block bg-rose-100 rounded font-medium text-lg px-3 py-2 hover:bg-rose-200"
+        type="button"
+        (click)="addExercise()">
+        Add Exercise
+      </button>
+    </div>
+    <div formArrayName="exercises" class="">
+      <ng-container
+        *ngFor="let exercise of exercises().controls; let exIndex = index">
+        <div [formGroupName]="exIndex">
+          <label for="exerciseName">Exercise Name</label>
+          <input
+            type="text"
+            formControlName="exerciseName"
+            placeholder="Exercise..." />
+          <button type="button" (click)="removeExercise(exIndex)">
+            Remove exercise
+          </button>
+          <ng-container formArrayName="sets">
+            <div class="grid grid-cols-4 gap-10 mb-2">
+              <span class="block text-lg text-center self-center">Set</span>
+              <span class="block text-lg text-center self-center">Reps</span>
+              <span class="block text-lg text-center self-center">Weight</span>
+              <span class="block text-lg text-center self-center">Delete</span>
+            </div>
+            <ng-container
+              *ngFor="let set of sets(exIndex).controls; let setIndex = index">
+              <div [formGroupName]="setIndex" class="grid grid-cols-4 gap-10">
+                <span class="block text-xl text-center self-center">{{
+                  setIndex
+                }}</span>
+                <input
+                  type="number"
+                  formControlName="reps"
+                  class="block shadow-sm text-lg border-b-2 border-emerald-200 outline-none focus:border-emerald-400 text-center self-center" />
+                <input
+                  type="number"
+                  formControlName="weight"
+                  class="block shadow-sm text-lg border-b-2 border-emerald-200 outline-none focus:border-emerald-400 text-center self-center" />
+                <button
+                  type="button"
+                  class="block text-2xl pb-1 bg-rose-500 hover:bg-rose-600 focus:bg-rose-600 mx-5 rounded-sm"
+                  (click)="removeSet(exIndex, setIndex)">
+                  &times;
+                </button>
+              </div>
+            </ng-container>
+          </ng-container>
+          <button type="button" (click)="addSet(exIndex)">Add set</button>
+        </div>
+      </ng-container>
+    </div>
+    <button type="button" (click)="addExercise()">Add exercise</button>
+    <button
+      class="inline-block bg-emerald-100 rounded font-medium text-lg px-3 py-2 hover:bg-emerald-200"
+      type="submit">
+      Done!
+    </button>
+  </form>
+</section>
