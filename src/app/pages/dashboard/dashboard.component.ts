@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { FireService } from 'src/app/shared/services/fire.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core'
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  constructor() {}
+  constructor(private fireSvc: FireService) {}
+
+  logout() {
+    this.fireSvc.logout()
+  }
 }
