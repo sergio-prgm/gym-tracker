@@ -1,0 +1,40 @@
+{
+  "workouts": [
+    {
+      "name": "upper",
+      "date": "29/03/2022",
+      "exercises": [
+        {
+          "name": "bench press",
+          "sets": 3,
+          "reps": [10, 8, 6],
+          "weight": [30, 35, 40]
+        },
+        {
+          "name": "lat pull down",
+          "sets": 3,
+          "reps": [10, 8, 6],
+          "weight": [45, 55, 60]
+        }
+      ]
+    },
+    {
+      "name": "lower",
+      "date": "24/03/2022",
+      "exercises": [
+        {
+          "name": "squats",
+          "sets": 3,
+          "reps": [10, 8, 6],
+          "weight": [70, 70, 80]
+        },
+        {
+          "name": "hip thrust",
+          "sets": 4,
+          "reps": [10, 8, 6, 6],
+          "weight": [60, 65, 65, 70]
+        }
+      ]
+    }
+  ]
+}
