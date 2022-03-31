@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "gym-crud-7cef6": {
+      "hosting": {
+        "gym-crud": [
+          "gym-crud-7cef6"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "gym-crud-7cef6"
+  }
+}

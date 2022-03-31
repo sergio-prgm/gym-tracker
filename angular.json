@@ -134,6 +134,16 @@
               "src/**/*.html"
             ]
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "gym-crud:build:production",
+            "firebaseProject": "gym-crud-7cef6",
+            "firebaseHostingSite": "gym-crud-7cef6"
+          }
         }
       }
     }
