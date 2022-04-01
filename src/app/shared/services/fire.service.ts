@@ -7,20 +7,17 @@ import {
   signInWithEmailAndPassword,
   User
 } from '@angular/fire/auth'
-import { signOut } from '@firebase/auth'
-
 import { AngularFireAuth } from '@angular/fire/compat/auth'
 import {
   AngularFirestore,
   AngularFirestoreCollection
 } from '@angular/fire/compat/firestore'
-import { Observable } from 'rxjs'
+import { BehaviorSubject, Observable, Subject, take, tap } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireService {
-  user$!: Observable<User>
   private workoutsCollection: AngularFirestoreCollection<Workout>
 
   constructor(private auth: AngularFireAuth, private af: AngularFirestore) {
