@@ -24,4 +24,8 @@ export class FireService {
   logout() {
     return signOut(this.auth)
   }
+
+  getLoggedUser() {
+    return this.auth.currentUser
+  }
 }

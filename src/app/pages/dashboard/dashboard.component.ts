@@ -8,8 +8,4 @@ import { FireService } from 'src/app/shared/services/fire.service'
 })
 export class DashboardComponent {
   constructor(private fireSvc: FireService) {}
-
-  logout() {
-    this.fireSvc.logout()
-  }
 }
