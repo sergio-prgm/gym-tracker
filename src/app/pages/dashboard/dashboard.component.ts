@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { Router } from '@angular/router'
 import { FireService } from 'src/app/shared/services/fire.service'
 
 @Component({
@@ -7,5 +8,14 @@ import { FireService } from 'src/app/shared/services/fire.service'
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  constructor(private fireSvc: FireService) {}
+  uid!: string | undefined
+  constructor(private router: Router, private fireSvc: FireService) {
+    this.fireSvc.getLoggedUser().subscribe(user => {
+      this.uid = user?.uid
+    })
+  }
+
+  onGoToNew(): void {
+    this.router.navigate(['workout'], { state: { value: this.uid } })
+  }
 }

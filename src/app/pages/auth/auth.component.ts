@@ -43,7 +43,10 @@ export class AuthComponent {
     this.registered
       ? this.fireSvc
           .login(this.loginForm.value)
-          .then(() => this.router.navigate(['/dashboard']))
+          .then(res => {
+            console.log(res)
+            this.router.navigate(['/dashboard'])
+          })
           .catch(error => console.log(error.message))
       : this.fireSvc
           .register(this.loginForm.value)

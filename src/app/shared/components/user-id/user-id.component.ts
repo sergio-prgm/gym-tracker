@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core'
-import { User } from '@angular/fire/auth'
+import { Component } from '@angular/core'
 import { Router } from '@angular/router'
+import { tap } from 'rxjs'
 import { FireService } from '../../services/fire.service'
 
 @Component({
@@ -8,20 +8,17 @@ import { FireService } from '../../services/fire.service'
   templateUrl: './user-id.component.html',
   styleUrls: ['./user-id.component.scss']
 })
-export class UserIdComponent implements OnInit {
-  userInfo!: User | null
+export class UserIdComponent {
+  userInfo$ = this.fireSvc.getLoggedUser()
+  userEmail = ''
   userName!: string
 
-  constructor(private fireSvc: FireService, private router: Router) {
-    this.userInfo = this.fireSvc.getLoggedUser()
-    if (this.userInfo?.email !== null && this.userInfo?.email !== undefined) {
-      let i = this.userInfo?.email.indexOf('@')
-      this.userName = this.userInfo?.email.slice(0, i)
-    }
-  }
+  constructor(private fireSvc: FireService, private router: Router) {}
 
-  ngOnInit(): void {
-    console.log(this.userInfo)
+  getname(userinfo: any): string {
+    let email = userinfo?.email
+    let i = email.indexOf('@')
+    return email.slice(0, i)
   }
 
   onLogOut(): void {

@@ -1,31 +1,61 @@
 import { Injectable } from '@angular/core'
+import { LoginData } from '../models/loginData.interface'
+import { Workout } from '../models/workout.interface'
 import {
   Auth,
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  User
 } from '@angular/fire/auth'
 import { signOut } from '@firebase/auth'
-import { LoginData } from '../models/loginData.interface'
+
+import { AngularFireAuth } from '@angular/fire/compat/auth'
+import {
+  AngularFirestore,
+  AngularFirestoreCollection
+} from '@angular/fire/compat/firestore'
+import { Observable } from 'rxjs'
 
 @Injectable({
   providedIn: 'root'
 })
 export class FireService {
-  constructor(private auth: Auth) {}
+  user$!: Observable<User>
+  private workoutsCollection: AngularFirestoreCollection<Workout>
+
+  constructor(private auth: AngularFireAuth, private af: AngularFirestore) {
+    this.workoutsCollection = af.collection<Workout>('workouts')
+  }
 
   login({ email, password }: LoginData) {
-    return signInWithEmailAndPassword(this.auth, email, password)
+    return this.auth.signInWithEmailAndPassword(email, password)
   }
 
   register({ email, password }: LoginData) {
-    return createUserWithEmailAndPassword(this.auth, email, password)
+    return this.auth.createUserWithEmailAndPassword(email, password)
   }
 
   logout() {
-    return signOut(this.auth)
+    return this.auth.signOut()
   }
 
   getLoggedUser() {
-    return this.auth.currentUser
+    return this.auth.authState
+  }
+
+  //? Workout methods
+
+  getWorkouts(uid: string) {}
+
+  addWorkout(workout: Workout): Promise<void> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const id = this.af.createId()
+        const result = await this.workoutsCollection.doc(id).set(workout)
+        resolve(result)
+      } catch (error) {
+        reject(error)
+      }
+    })
   }
 }

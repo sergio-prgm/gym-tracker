@@ -2,5 +2,7 @@
   <button class="px-3 rounded py-2 bg-red-600 text-white" (click)="onLogOut()">
     Log out
   </button>
-  <h2 class="px-3 py-2">Welcome {{ userName || 'username' }}</h2>
+  <h2 *ngIf="userInfo$ | async as userInfo" class="px-3 py-2">
+    Welcome {{ getname(userInfo) }}
+  </h2>
 </aside>

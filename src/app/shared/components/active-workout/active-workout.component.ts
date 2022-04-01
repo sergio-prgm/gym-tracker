@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Input, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms'
+import { Workout } from '../../models/workout.interface'
+// import { FireService } from '../../services/fire.service'
 
 @Component({
   selector: 'app-active-workout',
@@ -8,6 +10,8 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms'
 })
 export class ActiveWorkoutComponent implements OnInit {
   workoutForm!: FormGroup
+  @Input() uid!: string | undefined
+  submitWorkout!: Workout
 
   constructor(private fb: FormBuilder) {}
 
@@ -17,6 +21,7 @@ export class ActiveWorkoutComponent implements OnInit {
       date: [null, Validators.required],
       exercises: this.fb.array([])
     })
+    console.log(this.uid)
   }
 
   exercises(): FormArray {
@@ -59,6 +64,10 @@ export class ActiveWorkoutComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.workoutForm.value)
+    this.submitWorkout = { ...this.workoutForm.value, uid: this.uid }
+    console.log(this.submitWorkout)
+    // if (this.workoutForm.valid) {
+    //   this.fireSvc.addWorkout(this.submitWorkout)
+    // }
   }
 }
