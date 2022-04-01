@@ -1,38 +1,125 @@
 {
   "workouts": [
     {
-      "name": "upper",
+      "uid": "mDCsX4XSCngdTGsoHw9UVaQla1J2",
+      "workoutName": "upper",
       "date": "29/03/2022",
       "exercises": [
         {
-          "name": "bench press",
-          "sets": 3,
-          "reps": [10, 8, 6],
-          "weight": [30, 35, 40]
+          "exerciseName": "bench press",
+          "sets": [
+            {
+              "reps": 10,
+              "weight": 30
+            },
+            {
+              "reps": 8,
+              "weight": 35
+            },
+            {
+              "reps": 6,
+              "weight": 40
+            }
+          ]
         },
         {
-          "name": "lat pull down",
-          "sets": 3,
-          "reps": [10, 8, 6],
-          "weight": [45, 55, 60]
+          "exerciseName": "lat pull down",
+          "sets": [
+            {
+              "reps": 10,
+              "weight": 45
+            },
+            {
+              "reps": 8,
+              "weight": 55
+            },
+            {
+              "reps": 6,
+              "weight": 60
+            }
+          ]
         }
       ]
     },
     {
-      "name": "lower",
+      "uid": "mDCsX4XSCngdTGsoHw9UVaQla1J2",
+      "workoutName": "lower",
       "date": "24/03/2022",
       "exercises": [
         {
-          "name": "squats",
-          "sets": 3,
-          "reps": [10, 8, 6],
-          "weight": [70, 70, 80]
+          "exerciseName": "squats",
+          "sets": [
+            {
+              "reps": 10,
+              "weight": 70
+            },
+            {
+              "reps": 8,
+              "weight": 70
+            },
+            {
+              "reps": 6,
+              "weight": 80
+            }
+          ]
         },
         {
-          "name": "hip thrust",
-          "sets": 4,
-          "reps": [10, 8, 6, 6],
-          "weight": [60, 65, 65, 70]
+          "exerciseName": "hip thrust",
+          "sets": [
+            {
+              "reps": 10,
+              "weight": 60
+            },
+            {
+              "reps": 8,
+              "weight": 65
+            },
+            {
+              "reps": 6,
+              "weight": 70
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "uid": "7lxzaoPr1cXSNF5OEB1duPxyk4v2",
+      "workoutName": "upper",
+      "date": "28/03/2022",
+      "exercises": [
+        {
+          "exerciseName": "bench press",
+          "sets": [
+            {
+              "reps": 10,
+              "weight": 60
+            },
+            {
+              "reps": 8,
+              "weight": 70
+            },
+            {
+              "reps": 8,
+              "weight": 70
+            }
+          ]
+        },
+        {
+          "exerciseName": "rows",
+          "sets": [
+            {
+              "reps": 10,
+              "weight": 50
+            },
+            {
+              "reps": 8,
+              "weight": 60
+            },
+            {
+              "reps": 6,
+              "weight": 80
+            }
+          ]
         }
       ]
     }
