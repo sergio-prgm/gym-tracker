@@ -1,22 +1,25 @@
 <!-- <ng-container *ngIf="userInfo$ | async as userInfo"
   >{{ getUserWorkout(userInfo?.uid) }}
 </ng-container> -->
-<article class="mx-4" *ngFor="let workout of getUserWorkout(userInfo$ | async)">
-  <h4 class="mt-4 inline">{{ workout.date }}</h4>
-  <h3 class="text-xl font-medium uppercase mb-2 inline">
-    {{ workout.workoutName }}
-  </h3>
-  <button
-    class="bg-emerald-50 font-medium py-2 px-3"
-    (click)="toggleList(workout.date)">
-    Show
-  </button>
-  <ul *ngIf="showList.includes(workout.date)">
-    <li *ngFor="let exercise of workout.exercises">
-      <strong> {{ exercise.exerciseName }}</strong>
-      <span *ngFor="let set of exercise.sets">
-        {{ set.weight }}kg ({{ set.reps }})
-      </span>
-    </li>
-  </ul>
-</article>
+<ng-container *ngIf="userInfo$ | async as userInfo">
+  <article class="mx-4" *ngFor="let workout of workouts$ | async">
+    <!-- <article class="mx-4" *ngFor="let workout of workouts$ | async"> -->
+    <h4 class="mt-4 inline">{{ workout.date }}</h4>
+    <h3 class="text-xl font-medium uppercase mb-2 inline">
+      {{ workout.workoutName }}
+    </h3>
+    <button
+      class="bg-emerald-50 font-medium py-2 px-3"
+      (click)="toggleList(workout.date)">
+      Show
+    </button>
+    <ul *ngIf="showList.includes(workout.date)">
+      <li *ngFor="let exercise of workout.exercises">
+        <strong> {{ exercise.exerciseName }}</strong>
+        <span *ngFor="let set of exercise.sets">
+          {{ set.weight }}kg ({{ set.reps }})
+        </span>
+      </li>
+    </ul>
+  </article>
+</ng-container>

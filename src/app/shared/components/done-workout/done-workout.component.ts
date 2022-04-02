@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core'
-import { tap } from 'rxjs'
+import { Observable, tap } from 'rxjs'
 import mockworkout from '../../../../mock/mockWorkout.json'
 import { Workout } from '../../models/workout.interface'
 import { FireService } from '../../services/fire.service'
@@ -13,6 +13,8 @@ export class DoneWorkoutComponent {
   fakeWorkout: Workout[] = mockworkout['workouts']
   showWorkout!: Workout[]
   userInfo$ = this.fireSvc.getLoggedUser()
+  workouts$ = this.fireSvc.getWorkouts()
+  workouts!: []
 
   showList: string[] = []
   toggle: boolean = false
@@ -20,19 +22,21 @@ export class DoneWorkoutComponent {
   constructor(private fireSvc: FireService) {}
 
   // ngOnInit(): void {
-
   // }
 
-  getUserWorkout(user: any): Workout[] {
-    let uId = user?.uid
-    this.showWorkout = this.fakeWorkout.filter(wo => wo['uid'] === uId)
-    return this.showWorkout
-  }
+  // getUserWorkout(user: any): Observable<Workout[]> {
+  //   // let uId = user?.uid
+  //   // this.showWorkout = this.fakeWorkout.filter(wo => wo['uid'] === uId)
+  //   // return this.showWorkout
+  //   let uId = user?.uid
+  //   this.workouts$ = this.fireSvc.getWorkouts(uId)
+  //   console.log(uId)
+  //   return this.workouts$
+  // }
 
   toggleList(date: string) {
     if (this.showList.some(item => date === item)) {
       this.showList = this.showList.filter(item => item !== date)
-      console.log(this.showWorkout[0])
     } else {
       this.showList.push(date)
     }
