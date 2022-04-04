@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms'
+import { Router } from '@angular/router'
 import { Workout } from '../../models/workout.interface'
+import { FireService } from '../../services/fire.service'
 // import { FireService } from '../../services/fire.service'
 
 @Component({
@@ -12,8 +14,13 @@ export class ActiveWorkoutComponent implements OnInit {
   workoutForm!: FormGroup
   @Input() uid!: string | undefined
   submitWorkout!: Workout
+  showError = false
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private fireSvc: FireService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.workoutForm = this.fb.group({
@@ -37,7 +44,6 @@ export class ActiveWorkoutComponent implements OnInit {
 
   addExercise() {
     this.exercises().push(this.newExercise())
-    console.log(this.sets(0).length)
   }
 
   removeExercise(exIndex: number): void {
@@ -47,6 +53,11 @@ export class ActiveWorkoutComponent implements OnInit {
   sets(exIndex: number): FormArray {
     return this.exercises().at(exIndex).get('sets') as FormArray
   }
+
+  // convertDate() {
+  //   const nDate = Date.parse(this.workoutForm.value.date)
+  //   console.log(nDate, typeof nDate)
+  // }
 
   newSet(): FormGroup {
     return this.fb.group({
@@ -63,11 +74,43 @@ export class ActiveWorkoutComponent implements OnInit {
     this.sets(exIndex).removeAt(setIndex)
   }
 
+  showTouchedMain(field: string) {
+    return {
+      'border-rose-300':
+        this.workoutForm.get(field)?.touched &&
+        this.workoutForm.get(field)?.invalid
+    }
+  }
+
+  showTouchedSub(field: string, fgIndex: any) {
+    return {
+      'border-rose-300':
+        this.exercises().at(fgIndex).get(field)?.touched &&
+        this.exercises().at(fgIndex).get(field)?.invalid
+      // this.workoutForm.get(field)?.invalid
+    }
+  }
+
+  showTouchedSub2(field: string, exIndex: number, setIndex: number) {
+    return {
+      'border-rose-300':
+        this.sets(exIndex).at(setIndex).get(field)?.touched &&
+        this.sets(exIndex).at(setIndex).get(field)?.invalid
+    }
+  }
+
+  onGoBack(): void {
+    this.router.navigate(['dashboard'])
+  }
+
   onSubmit(): void {
     this.submitWorkout = { ...this.workoutForm.value, uid: this.uid }
     console.log(this.submitWorkout)
-    // if (this.workoutForm.valid) {
-    //   this.fireSvc.addWorkout(this.submitWorkout)
-    // }
+    if (this.workoutForm.valid) {
+      this.fireSvc.addWorkout(this.submitWorkout)
+      this.onGoBack()
+    } else {
+      this.showError = true
+    }
   }
 }

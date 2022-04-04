@@ -8,6 +8,7 @@
         class="block text-3xl w-full font-medium px-3 py-2 mb-6 border-b-2 bg-none border-emerald-200 outline-none focus:border-emerald-400"
         id="workoutName"
         name="workoutName"
+        [ngClass]="showTouchedMain('workoutName')"
         formControlName="workoutName"
         placeholder="Workout name" />
       <input
@@ -15,6 +16,7 @@
         class="block mb-4 outline-none text-lg"
         id="date"
         name="date"
+        [ngClass]="showTouchedMain('date')"
         formControlName="date" />
     </div>
     <div formArrayName="exercises" class="">
@@ -25,6 +27,7 @@
             <input
               type="text"
               class="px-3 py-1 text-xl border-b-2 mb-4 w-full border-emerald-200 outline-none focus:border-emerald-400"
+              [ngClass]="showTouchedSub('exerciseName', exIndex)"
               formControlName="exerciseName"
               placeholder="Exercise Name..." />
             <button
@@ -50,10 +53,12 @@
                 <input
                   type="number"
                   formControlName="reps"
+                  [ngClass]="showTouchedSub2('reps', exIndex, setIndex)"
                   class="block text-lg border-b-2 border-emerald-200 outline-none focus:border-emerald-400 text-center self-center" />
                 <input
                   type="number"
                   formControlName="weight"
+                  [ngClass]="showTouchedSub2('weight', exIndex, setIndex)"
                   class="block text-lg border-b-2 border-emerald-200 outline-none focus:border-emerald-400 text-center self-center" />
                 <button
                   type="button"
@@ -85,4 +90,17 @@
       Done!
     </button>
   </form>
+  <span *ngIf="showError" class="text-xl text-red-600 mt-3 block w-full"
+    >Please, fill in all fields</span
+  >
+  <button
+    type="button"
+    class="bg-slate-300 text-lg font-medium rounded block py-2 px-3 my-4"
+    (click)="onGoBack()">
+    Go to Dashboard
+  </button>
 </section>
+
+<!-- <button class="bg-blue p-4" (click)="convertDate()">Timestamp</button> -->
+<!-- // todo change underline color when touched -->
+<!-- // show error msg when (Done! click) if the form is invalid -->
