@@ -12,6 +12,8 @@ import { Router } from '@angular/router'
 export class AuthComponent {
   loginForm!: FormGroup
   registered: boolean = true
+  emailError = false
+  passwordError = false
 
   passwordPattern: RegExp =
     /^(?=.*[\d])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*])[\w!@#$%^&*]{8,}$/

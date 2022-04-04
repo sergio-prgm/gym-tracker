@@ -30,6 +30,13 @@
           id="email"
           placeholder="Email..."
           class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+        <span
+          *ngIf="
+            loginForm.get('email')?.touched && loginForm.get('email')?.invalid
+          "
+          class="text-md text-red-600 mt-2 block w-full"
+          >Email must be correct
+        </span>
       </div>
       <div class="mb-6">
         <label for="password" class="block text-gray-700 font-bold mb-2">
@@ -43,7 +50,15 @@
           placeholder="Password..."
           class="shadow-sm appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
         <div *ngIf="loginForm.get('password')?.errors?.['pattern']">
-          La contraseña no es correcta
+          Password must contain:
+          <ul class="text-sm">
+            <li>At least 8 characters</li>
+            <li>At least one special character</li>
+            <li>At least one number</li>
+            <li>At least one Uppercase letter</li>
+            <li>At least one Lowercase letter</li>
+            <li></li>
+          </ul>
         </div>
       </div>
       <div class="flex items-center justify-between">
